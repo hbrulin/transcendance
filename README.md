@@ -1,24 +1,15 @@
-# README
+# Transcendance
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#install RVM and ruby
+- https://rvm.io/rvm/install with rails
+- rvm install "ruby-2.6.3"
 
-Things you may want to cover:
+#Setup docker compose
+- https://ashleyconnor.co.uk/2017/07/22/local-rails-development-with-docker-and-docker-compose.html
+- Build docker img for rails : docker build --tag transcendance .
+- docker run -it -p 3000:3000 transcendance
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Other resources for docker-compose:
+https://docs.docker.com/compose/rails/ 
+https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-application-for-development-with-docker-compose-fr  
+https://github.com/rails/webpacker/blob/master/docs/docker.md 
