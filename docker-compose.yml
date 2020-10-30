@@ -10,7 +10,7 @@ services:
     build: . #change if several dockerfiles
     command: bin/rails s -b 0.0.0.0
     volumes:
-      - .:/app #name of working directory in dockerfile
+      - .:/app #name of working directory in dockerfile. Comme ça ce qui se fait dans la console est gardé?
     ports:
       - "3000:3000"
     depends_on: #this takes care of the connectivity between two containers
