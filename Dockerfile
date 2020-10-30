@@ -1,7 +1,7 @@
 FROM ruby:2.6.3-alpine
 
 #dependencies that will help us install rails gems that require native extensions such as postgresql gems
-ENV DEV_PACKAGES="build-base ruby-dev zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev sqlite-dev yarn" \
+ENV DEV_PACKAGES="build-base ruby-dev zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev postgresql-dev yarn" \
     RAILS_PACKAGES="nodejs"
 
 RUN apk --update --upgrade add $RAILS_PACKAGES $DEV_PACKAGES
@@ -19,8 +19,10 @@ COPY Gemfile Gemfile.lock ./
 
 #install bundler and all our gems
 RUN gem install bundler && bundle install --jobs 20 --retry 5
+#compiler for Rails 6 - needs yarn to work.
 RUN rails webpacker:install
-COPY package.json ./
+#needed by yarn to create lockfile with dependencies
+COPY package.json ./ 
 RUN yarn install --check-files
 RUN yarn check
 

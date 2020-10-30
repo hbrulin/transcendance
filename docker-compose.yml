@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db: #container_name
+    image: postgres:12 #change if custom dockerfile needed
+    environment: 
+      POSTGRES_PASSWORD: password
+    volumes:
+       - ./data/postgresql:/var/lib/postgresql/data #prevents the Postgres container from losing all stored data when container restarts
+  backend: #container name
+    build: . #change if several dockerfiles
+    command: bin/rails s -b 0.0.0.0
+    volumes:
+      - .:/app #name of working directory in dockerfile
+    ports:
+      - "3000:3000"
+    depends_on: #this takes care of the connectivity between two containers
+      - db
