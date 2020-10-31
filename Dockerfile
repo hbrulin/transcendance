@@ -20,9 +20,10 @@ COPY Gemfile Gemfile.lock ./
 #install bundler and all our gems
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 #compiler for Rails 6 - needs yarn to work.
-RUN rails webpacker:install
+#RUN rails webpacker:install
 #needed by yarn to create lockfile with dependencies
 COPY package.json ./ 
+COPY yarn.lock ./
 RUN yarn install --check-files
 RUN yarn check
 

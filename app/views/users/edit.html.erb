@@ -1,0 +1,9 @@
+<h1>Users#edit</h1>
+<p>Find me in app/views/users/edit.html.erb</p>
+
+<h3>Update User Details</h3>
+<%= form_with model: @user do |form| %>
+  <%= form.text_field :name, placeholder: "name" %>
+
+  <%= form.submit %>
+<% end %>

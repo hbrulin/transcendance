@@ -21,8 +21,12 @@ https://rollout.io/blog/running-rails-development-environment-docker/
 
 #Work in docker-compose environment
 - docker-compose up / docker-compose up --build
+
 - docker-compose run db psql -h db -U postgres - connect psql to our running database
-- docker-compose run backend console - open a rails console (works for any rails command)
+- docker-compose run backend rails console - open a rails console (works for any rails command)
+- docker exec -it xxxxxxx bin/rails c // same but while running with docker compose up
+https://blog.eq8.eu/til/how-to-lunch-rails-console-in-specific-docker-container.html 
+- docker exec -it xxxxxxx sh enter container with launching any console
 
 #Sharefiled system
 -> with docker run or docker-compose up, use with -v $(pwd):/app IMG .... to mount a volume and save what is being done
@@ -34,14 +38,46 @@ https://rollout.io/blog/running-rails-development-environment-docker/
 docker-compose down - stop the app
 If you make changes to the Gemfile or the Compose file to try out some different configurations, you need to rebuild. Some changes require only docker-compose up --build, but a full rebuild requires a re-run of docker-compose run web bundle install to sync changes in the Gemfile.lock to the host, followed by docker-compose up --build.
 
-#fonctionnement rails:
-- define route
-- define controller lié à la route
-- define view appelee par controller -> remplace par backbone
-
 #Migration
 https://guides.rubyonrails.org/v3.2/migrations.html
 - le dossier db contient les migrations
 - on peut générer les fichiers : rails g migration CreateTableName title:string
 - puis rails db:migrate
 - evite d'avoir à utiliser la console pg
+
+
+#CRUD
+https://medium.com/@nancydo7/ruby-on-rails-crud-tutorial-899117710c7a
+- docker exec -it xxxxxxx sh
+- Generate a model : Models talk to the database, store and validate data.
+	rails g model user name guild_id banned (name of model always singular / add fields after)
+- This creates two files : 
+	app/models/user.rb
+	db/migrate/[date_time]_create_users.rb
+- generate a controller : a controller coordinates interaction between the user, the views and the model. gets request from view and coordinates with model
+	rails g controller users index show new edit (controllers' names should be plural)
+- This creates:
+	- a controller file : users_controller.rb
+	- it updates the routes.rb file with new routes
+	- 4 new files in views
+- in routes.rb, remove the news routes and replace with "resources :users" - this creates routes corresponding to the different controllers
+- eventually update the migrate file so that the table will be migrated with the right fields
+- rake db:migrate . This will create the table in our SQLite database based on what is in our db/migrate/[date_time]_create_users.rb file.
+- Add some users in db/migrate/seeds.rb to test
+- check in rails console
+- see all routes the app is configured to : http://localhost:3000/rails/info/routes
+- To read this data (ex to list all users): 
+	- update the index method of users_controller.rb : @users = User.all. when the corresponding index route is called, the index method will be called (note that routes are made from resources :users - no need to define them one by one, one was made for each controller, but you can see them in above url)
+	- update the index view file with an iteration on each user and a link that will go the the show view for each user : the link takes the route called user_path which corresponds to /users/:id (as shown in the routes displayed on localhost:3000/rails/info/routes)
+	- localhost:3000/users displays it (as seen in the display of routes : the route called users_path is /users translated in URI)
+	- update the show method of controller and the show view to display info and access it with localhost:3000/user/ID
+	- then update controller with new, create and user_params methods (to define which are required) + update the view to have a form. Look at the new_user_path : the uri is /users/new.
+	- pourquoi il y a deux forms dans la view? 
+	- Same with edit.
+	- add a destroy controller and update show view to use it
+
+#update structure d'une table de la db
+- generate migration
+- in file use method change_table :TABLE do |t|
+- define what to do https://riptutorial.com/ruby-on-rails/example/5849/changing-tables
+- rake db:migrate
