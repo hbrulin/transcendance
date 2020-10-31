@@ -5,13 +5,22 @@ services:
     environment: 
       POSTGRES_PASSWORD: password
     volumes:
-       - ./data/postgresql:/var/lib/postgresql/data #prevents the Postgres container from losing all stored data when container restarts
+       - ./data/postgresql:/var/lib/postgresql/data #prevents the Postgres container from losing all stored data when container restarts. Maps postgres data volume to host directory data/postgres
   backend: #container name
     build: . #change if several dockerfiles
-    command: bin/rails s -b 0.0.0.0
+    command: bin/rails s -b 0.0.0.0 # can be removed because redundant
     volumes:
-      - .:/app #name of working directory in dockerfile. Comme ça ce qui se fait dans la console est gardé?
+      - .:/app #name of working directory in dockerfile. Comme ça ce qui se fait dans la console est gardé dans /app en local
     ports:
       - "3000:3000"
     depends_on: #this takes care of the connectivity between two containers
       - db
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file: .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
