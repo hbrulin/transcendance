@@ -17,12 +17,6 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:name)
-  end
-
   def edit
 	@user = User.find(params[:id])
   end
@@ -34,17 +28,17 @@ class UsersController < ApplicationController
     redirect_to user_path(@user)
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:name)
-  end
-
   def destroy
     @user = User.find(params[:id])
     @user.destroy
 
     redirect_to users_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name)
   end
 
 end

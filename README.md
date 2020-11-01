@@ -81,3 +81,10 @@ https://medium.com/@nancydo7/ruby-on-rails-crud-tutorial-899117710c7a
 - in file use method change_table :TABLE do |t|
 - define what to do https://riptutorial.com/ruby-on-rails/example/5849/changing-tables
 - rake db:migrate
+
+#Global fonctionnement
+- browser sends a request to server
+- rails gets request and follows the method listed in routes list (get, delete, post etc..) - matches it with appropriate route
+- when it finds the route, it maps it to the method in controller and calls it
+- from there, it finds the associated view page and displays
+https://betterexplained.com/articles/intermediate-rails-understanding-models-views-and-controllers/ 
