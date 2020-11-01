@@ -21,9 +21,10 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 #compiler for Rails 6 - needs yarn to work.
 #RUN rails webpacker:install
+#RUN rails generate backbone:install
 #needed by yarn to create lockfile with dependencies
 COPY package.json ./ 
-COPY yarn.lock ./
+#COPY yarn.lock ./
 RUN yarn install --check-files
 RUN yarn check
 

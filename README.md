@@ -102,3 +102,9 @@ https://betterexplained.com/articles/intermediate-rails-understanding-models-vie
 #see databases
 - open to psql console : docker-compose run db psql -h db -U postgres
 - \list
+
+#add backbones
+- remove turbolinks in gemfile cuz it breaks in backbone + package.json
+- same in app/javascript/application.js
+- same in app views layouts/applications : remove the town turbolink data
+- add backbone to 
