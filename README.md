@@ -88,3 +88,17 @@ https://medium.com/@nancydo7/ruby-on-rails-crud-tutorial-899117710c7a
 - when it finds the route, it maps it to the method in controller and calls it
 - from there, it finds the associated view page and displays
 https://betterexplained.com/articles/intermediate-rails-understanding-models-views-and-controllers/ 
+
+#Configure pg_admin
+- log_in with env variables defined in docker-compose for pg_admin 
+- add a server : choose name and go to connection tab
+- Host_name/address : use the name of container pgsql : db (host value in database.yml)
+- port : 5432 (see with docker ps of configure it with env variable in database.yml)
+- Maintenance databse : name of the database - could be set in env variable of database.yml, but here it is postgres (use \list in pqsgl console to list databses)
+- username and password configured for pgsql database in database.yml
+- aller dans la db transcendance developpement, schemas, puis tables
+
+
+#see databases
+- open to psql console : docker-compose run db psql -h db -U postgres
+- \list
