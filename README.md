@@ -103,8 +103,33 @@ https://betterexplained.com/articles/intermediate-rails-understanding-models-vie
 - open to psql console : docker-compose run db psql -h db -U postgres
 - \list
 
-#add backbones
-- remove turbolinks in gemfile cuz it breaks in backbone + package.json
-- same in app/javascript/application.js
-- same in app views layouts/applications : remove the town turbolink data
-- add backbone to 
+#backbones
+https://backbonejs.org/
+https://github.com/thoughtbot/backbone-js-on-rails 
+https://www.tutorialspoint.com/backbonejs/backbonejs_overview.htm 
+- doesn't have controllers : bacbone routers and views work together to pick up the functionnalities provided by rails controllers.
+- collections : sets of models
+
+Fonctionnement avec rails :
+A request from a user comes in; the Rails router identifies what should
+handle the request, based on the URL
+• The Rails controller action to handle the request is called; some initial
+processing may be performed
+• The Rails view template is rendered and returned to the user’s browser
+• The Rails view template will include Backbone initialization; usually this
+is populating some Backbone collections as sets of Backbone models
+with JSON data provided by the Rails view
+• The Backbone router determines which of its methods should handle
+the display, based on the URL
+• The Backbone router calls that method; some initial processing may be
+performed, and one or more Backbone views are rendered
+• The Backbone view reads templates and uses Backbone models to render itself onto the page
+
+Whenever a UI action causes an attribute of a model to change, the model triggers a "change" event; all the Views that display the model's state can be notified of the change, so that they are able to respond accordingly, re-rendering themselves with the new information. In a finished Backbone app, you don't have to write the glue code that looks into the DOM to find an element with a specific id, and update the HTML manually — when the model changes, the views simply update themselves.
+
+Direction flow : BB View <=> BB Model <=> Rails Controller <=> Rails Model
+
+#adding backbone : yarn add backbone in console. Updates package.json and yarn.lock.
+
+#getting started with js and backbone
+https://adrianmejia.com/backbone-dot-js-for-absolute-beginners-getting-started/ 
