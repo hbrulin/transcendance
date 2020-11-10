@@ -24,13 +24,14 @@ https://docs.docker.com/compose/rails/
 https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-application-for-development-with-docker-compose-fr  
 https://rollout.io/blog/running-rails-development-environment-docker/ 
 
-#configuration typescript et css
+#configuration webpacker typescript et css
 - install webpacker typescript compatibility : rails webpacker:install:typescript
 - setup typescript import syntax in tsconfig.json
 - setup typescript compatibility in config/development.js and config/environmnet.js and config/loaders/typescript.js
 - setup css in postcss.config.js and tailwind.config.js
 - in application.html.erb template, it will look for application.ts and application.scss files in javascript folder to startup.
 - reinstalling webpacker will deconfigure all of this as webpacker is the compiler for all those things and needs to be told how to compile
+- https://rossta.net/blog/how-to-use-webpacker-yml.html 
 
 
 #Work in docker-compose environment
