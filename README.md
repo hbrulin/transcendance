@@ -1,6 +1,6 @@
 # Transcendance
 
-#This is a initial setup for transcendance project with docker-compose, with rails and backbones:
+#This is an initial setup for transcendance project with docker-compose, with rails and backbones:
 - building the image will run yarn install which will create node_modules folder and install the gems + yarn.lock. The node_modules folder is in the .gitignore so that everything can be freshly reinstalled. If need to update a module, you need to delete the folder and rebuild the image.
 - the pgsql image will be built on a volume called data that will also be created during the build. It is also in the gitgnore. Therefore at first start of the db, we run "rails db:drop db:create db:migrate db:seed" (see entrypoint.sh)
 - webpacker-dev-server is launched at the same time as the rails server so that it compiles in advance the css and typescript - quicker navigation afterwards
