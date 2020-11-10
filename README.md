@@ -1,6 +1,6 @@
 # Transcendance
 
-#This is a initial setup for transcendance project with docker-compose, with rails and backbones:
+#This is an initial setup for transcendance project with docker-compose, with rails and backbones:
 - building the image will run yarn install which will create node_modules folder and install the gems + yarn.lock. The node_modules folder is in the .gitignore so that everything can be freshly reinstalled. If need to update a module, you need to delete the folder and rebuild the image.
 - the pgsql image will be built on a volume called data that will also be created during the build. It is also in the gitgnore. Therefore at first start of the db, we run "rails db:drop db:create db:migrate db:seed" (see entrypoint.sh)
 - webpacker-dev-server is launched at the same time as the rails server so that it compiles in advance the css and typescript - quicker navigation afterwards
@@ -25,10 +25,11 @@ https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-
 https://rollout.io/blog/running-rails-development-environment-docker/ 
 
 #configuration typescript et css
-- install webpacker typescript compatibility
+- install webpacker typescript compatibility : rails webpacker:install:typescript
 - setup typescript import syntax in tsconfig.json
 - setup typescript compatibility in config/development.js and config/environmnet.js and config/loaders/typescript.js
 - setup css in postcss.config.js and tailwind.config.js
+- in application.html.erb template, it will look for application.ts and application.scss files in javascript folder to startup.
 - reinstalling webpacker will deconfigure all of this as webpacker is the compiler for all those things and needs to be told how to compile
 
 
@@ -110,15 +111,11 @@ https://betterexplained.com/articles/intermediate-rails-understanding-models-vie
 - username and password configured for pgsql database in database.yml
 - aller dans la db transcendance developpement, schemas, puis tables
 
-
 #see databases
 - open to psql console : docker-compose run db psql -h db -U postgres
 - \list
 
 #backbones
-https://backbonejs.org/
-https://github.com/thoughtbot/backbone-js-on-rails 
-https://www.tutorialspoint.com/backbonejs/backbonejs_overview.htm 
 - doesn't have controllers : bacbone routers and views work together to pick up the functionnalities provided by rails controllers.
 - collections : sets of models
 
@@ -143,3 +140,57 @@ Direction flow : BB View <=> BB Model <=> Rails Controller <=> Rails Model
 
 
 #Typescript
+- le javascript est un langage au typage dynamique : on peut modifier le type des données à la volée au cours de l'exécution. Source de nbeux bugs. 
+- Typescript introduit dans js plusieurs types de bases + un typage statique.
+- Un langage est dit de typage statique quand celui-ci vérifie les types des variables à la compilation, alors qu’un langage dit de typage dynamique, effectue cette vérification à l’exécution.
+- déclaration variable avec let ou var: 
+```ts
+let myVar: boolean;  //default value is false
+let myVarinitialize: number = 2;
+var bar = "hello world"; //typage implicite reste possible
+```
+- variable de type any : permet typage dynamique de js : on peut changer son type en cours d'execution
+- template string : 
+```ts 
+var template: string = `My var is: ${var}`;
+```
+- en typescript, erreurs de compilation si mauvais type passé en param
+- une fonction qui prend une string :
+```ts 
+function f(name: string): string { //deuxième partie indique que la fonction return string
+   return name;
+}
+```
+- fonction avec paramètres optionnels : function f(name: string, option?: string): string
+- arrays : two ways :
+```ts
+var names: string[] = [“Pierre”,”Paul”,”Jaques”];
+var otherNames: Array<string> = [“Pierre”,”Paul”,”Jaques”];
+```
+
+- interfaces : permet de définir des conditions (propriétés/méthodes) requises pour un objet :
+```ts
+interface IPerson{  
+   firstName: string;
+   lastName: string;
+}
+```
+Pour qu'un objet satisfasse cette interface, il doit contenir au moins toutes les propriétés et méthodes de cette interface.
+Une fonction peut prendre en paramètre une interface, et dès lors cherchera dans l'objet qui lui est passé si respect de l'interface. 
+Possible qu'une interface hérite d'une autre.
+
+- typescript permet aussi d'utiliser des classes. pour accéder aux variables de classes : this.var. Héritage via mot-clé extends. 
+
+- Modules : équivalent d'un namespace : regroupement logique de classes et d'interfaces qui permet de structurer un projet. Le module se déclare à l'aide de 'export module Module1 {}'. Les modules peuvent aussi bien exposer des classes que des fonctions, des constantes ou des interfaces.
+Ex utilisation : 
+```ts
+import {Module1} from './app/module1'
+let md = new Module1.Person();
+md.greeting();
+let person : Module1.IGreeter = md;
+```
+- on peut aussi utiliser un module sans le mot-clé module, en considérant que tout ce qui est dans un fichier est un module( bien mettre export devant chaque fonction/methodes/variable) et dans le fichier qui va utiliser le module : import m = require("./module2");
+
+#Doc typescript : 
+https://blog.cellenza.com/developpement-specifique/web-developpement-specifique/introduction-a-typescript/ 
+https://yahiko.developpez.com/tutoriels/introduction-typescript/
