@@ -1,27 +1,39 @@
 # Transcendance
 
-#install RVM and ruby
-- https://rvm.io/rvm/install with rails
+#This is a initial setup for transcendance project with docker-compose, with rails and backbones:
+- building the image will run yarn install which will create node_modules folder and install the gems + yarn.lock. The node_modules folder is in the .gitignore so that everything can be freshly reinstalled. If need to update a module, you need to delete the folder and rebuild the image.
+- the pgsql image will be built on a volume called data that will also be created during the build. It is also in the gitgnore. Therefore at first start of the db, we run "rails db:drop db:create db:migrate db:seed" (see entrypoint.sh)
+- webpacker-dev-server is launched at the same time as the rails server so that it compiles in advance the css and typescript - quicker navigation afterwards
+- authentification with 42 login is enabled and there are a few divs implemented with backbone.js + jquery + mustache 
+- backend is on rails : there is a users table and one user that can seed the db. There are controller methods implemented for the users table. Matching routes + ones for authent are in routes.db.
+- all the frontend is in the javascript folder and uses the templates in views.
 
-#Docker cmds (not used)
-- Build docker img for rails : docker build --tag backend .
-- docker run -it -p 3000:3000 backend)
-- Use docker volumes to save in host filesystem what is being done within container:
-	- docker run -itP -v $(pwd):/app IMG (https://ashleyconnor.co.uk/2017/07/22/local-rails-development-with-docker-and-docker-compose.html)
+#Use:
+- docker-compose up (--build)
+- localhost:3000
+	- If there are webpacker compilation issues or gem issues : delete the volumes gem_cache and the node_modules (delete the folders), the yarn.lock and rebuild.  This will recreate the folders from scratch. (everytime there is a new module or gem added, this needs to be done)
+	- if there is a database issue : delete the data folder and run in console : rails db:drop db:create db:migrate db:seed 
 
+-------
 
 #Setup docker compose
 - https://ashleyconnor.co.uk/2017/07/22/local-rails-development-with-docker-and-docker-compose.html
-- docker-compose up (this will build and link a backend container -rails- and a db container)
-- Create database (1st time): docker-compose run backend rake db:create
+- important to set up volumes for node_modules and gems otherwise yarn install will not work properly and we won't have access to the modules necessary to make 
 Other resources for docker-compose:
 https://docs.docker.com/compose/rails/ 
 https://www.digitalocean.com/community/tutorials/containerizing-a-ruby-on-rails-application-for-development-with-docker-compose-fr  
 https://rollout.io/blog/running-rails-development-environment-docker/ 
 
+#configuration typescript et css
+- install webpacker typescript compatibility
+- setup typescript import syntax in tsconfig.json
+- setup typescript compatibility in config/development.js and config/environmnet.js and config/loaders/typescript.js
+- setup css in postcss.config.js and tailwind.config.js
+- reinstalling webpacker will deconfigure all of this as webpacker is the compiler for all those things and needs to be told how to compile
+
+
 #Work in docker-compose environment
 - docker-compose up / docker-compose up --build
-
 - docker-compose run db psql -h db -U postgres - connect psql to our running database
 - docker-compose run backend rails console - open a rails console (works for any rails command)
 - docker exec -it xxxxxxx bin/rails c // same but while running with docker compose up
@@ -129,7 +141,5 @@ Whenever a UI action causes an attribute of a model to change, the model trigger
 
 Direction flow : BB View <=> BB Model <=> Rails Controller <=> Rails Model
 
-#adding backbone : yarn add backbone in console. Updates package.json and yarn.lock.
 
-#getting started with js and backbone
-https://adrianmejia.com/backbone-dot-js-for-absolute-beginners-getting-started/ 
+#Typescript

@@ -1,0 +1,23 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+.btn-primary {
+  @apply text-center py-2 px-4 bg-teal-500 text-white rounded-lg shadow-lg;
+
+  &--lg {
+    @extend .btn-primary;
+
+    @apply py-4 px-12 text-lg;
+  }
+}
+
+.btn-primary:hover {
+  @apply bg-teal-600 transition-colors duration-300 ease-in-out;
+}
+
+.svg-btn {
+  @apply w-6 h-6 cursor-pointer;
+}

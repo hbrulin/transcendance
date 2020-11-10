@@ -1,4 +1,4 @@
-FROM ruby:2.6.3-alpine
+FROM ruby:2.7.0-alpine
 
 #dependencies that will help us install rails gems that require native extensions such as postgresql gems
 ENV DEV_PACKAGES="build-base ruby-dev zlib-dev libxml2-dev libxslt-dev tzdata yaml-dev postgresql-dev yarn" \
@@ -9,7 +9,7 @@ RUN apk --update --upgrade add $RAILS_PACKAGES $DEV_PACKAGES
 #create working directories and copy in our Gemfile so we can install our project's dependencies
 
 #this will hold rails project
-RUN mkdir -p /app 
+RUN mkdir -p /app
 
 #sets up the working directory for any instructions that follow
 WORKDIR /app
@@ -21,10 +21,9 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && bundle install --jobs 20 --retry 5
 #compiler for Rails 6 - needs yarn to work.
 #RUN rails webpacker:install
-#RUN rails generate backbone:install
+
 #needed by yarn to create lockfile with dependencies
-COPY package.json ./ 
-#COPY yarn.lock ./
+COPY package.json ./
 RUN yarn install --check-files
 RUN yarn check
 
@@ -33,4 +32,4 @@ COPY . ./
 
 EXPOSE 3000
 
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+CMD ["sh", "docker-entrypoint.sh"]
