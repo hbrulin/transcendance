@@ -195,3 +195,10 @@ let person : Module1.IGreeter = md;
 #Doc typescript : 
 https://blog.cellenza.com/developpement-specifique/web-developpement-specifique/introduction-a-typescript/ 
 https://yahiko.developpez.com/tutoriels/introduction-typescript/
+
+
+#using vscode inside container
+(for node_module imports related errors)
+- download remote container extension pack
+- click on >< icon (green) on bottom left and select open folder in container. Choose folder and then select starting point from docker-compose.
+https://code.visualstudio.com/docs/remote/containers#_getting-started
