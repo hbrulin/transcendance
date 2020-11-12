@@ -202,3 +202,10 @@ https://yahiko.developpez.com/tutoriels/introduction-typescript/
 - download remote container extension pack
 - click on >< icon (green) on bottom left and select open folder in container. Choose folder and then select starting point from docker-compose.
 https://code.visualstudio.com/docs/remote/containers#_getting-started
+
+
+#Frontend system
+- app/views/application/index.hml is the single page : containers an id container that will be replaced with different templates (all in app/views folder). In this file, you have to specify render tags for each template that will be rendered.
+- There are pages template(/pages) and elements template. Pages templates can nest element templates through div ids and what is specified in javascript/src/views.
+-in javascript/src/views, you create classes for a View that extends a BaseView class (héritage). the class has a render function which renders a template based on the id given to a template.html.erb. Within this function nested views can be rendered at the place corresponding to the id given to the function renderedNested. nested views must also have their corresponding template, and the id of this subtemplate will be the one selected by the render function of the subview. 
+- the frontend main router (js/routers/MainRouter.ts) must include a new route if what is being added is a new page (not necessary for subviews). the list of paths and uris has to be updated as well in js/src/views/index.ts. (which is not the IndexView.ts, but is like the "backbone" of the single page app - configuring navigation and auth callbacks and proper loading of DOM before executing script)
