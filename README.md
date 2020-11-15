@@ -209,3 +209,10 @@ https://code.visualstudio.com/docs/remote/containers#_getting-started
 - There are pages template(/pages) and elements template. Pages templates can nest element templates through div ids and what is specified in javascript/src/views.
 -in javascript/src/views, you create classes for a View that extends a BaseView class (héritage). the class has a render function which renders a template based on the id given to a template.html.erb. Within this function nested views can be rendered at the place corresponding to the id given to the function renderedNested. nested views must also have their corresponding template, and the id of this subtemplate will be the one selected by the render function of the subview. 
 - the frontend main router (js/routers/MainRouter.ts) must include a new route if what is being added is a new page (not necessary for subviews). the list of paths and uris has to be updated as well in js/src/views/index.ts. (which is not the IndexView.ts, but is like the "backbone" of the single page app - configuring navigation and auth callbacks and proper loading of DOM before executing script)
+
+
+#css
+- add files in javascript/stylesheets and add its path to application.ts
+- https://www.youtube.com/watch?v=UBOj6rqRUME : tailwind
+- https://www.youtube.com/watch?v=jx5jmI0UlXU : css positioning
+- https://www.youtube.com/watch?v=fYq5PXgSsbE : flexboxes
