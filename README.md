@@ -216,3 +216,7 @@ https://code.visualstudio.com/docs/remote/containers#_getting-started
 - https://www.youtube.com/watch?v=UBOj6rqRUME : tailwind
 - https://www.youtube.com/watch?v=jx5jmI0UlXU : css positioning
 - https://www.youtube.com/watch?v=fYq5PXgSsbE : flexboxes
+
+
+#Use rails permit and require in controllers to prevent SQL injection
+- https://stackoverflow.com/questions/18424671/what-is-params-requireperson-permitname-age-doing-in-rails-4
