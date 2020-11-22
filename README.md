@@ -192,6 +192,9 @@ let person : Module1.IGreeter = md;
 ```
 - on peut aussi utiliser un module sans le mot-clé module, en considérant que tout ce qui est dans un fichier est un module( bien mettre export devant chaque fonction/methodes/variable) et dans le fichier qui va utiliser le module : import m = require("./module2");
 
+- Typescripts types : si j'ajoute un module, je dois ajouter aussi ses types : https://github.com/DefinitelyTyped/DefinitelyTyped
+- yarn add -D @types/backbone-relational ou yarn add --dev
+
 #Doc typescript : 
 https://blog.cellenza.com/developpement-specifique/web-developpement-specifique/introduction-a-typescript/ 
 https://yahiko.developpez.com/tutoriels/introduction-typescript/
@@ -220,3 +223,7 @@ https://code.visualstudio.com/docs/remote/containers#_getting-started
 
 #Use rails permit and require in controllers to prevent SQL injection
 - https://stackoverflow.com/questions/18424671/what-is-params-requireperson-permitname-age-doing-in-rails-4
+
+#Backbone relational
+- http://antoviaque.org/docs/tutorials/backbone-relational-tutorial/
+- https://hub.packtpub.com/relations-in-backbone/
