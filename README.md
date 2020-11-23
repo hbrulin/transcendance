@@ -227,3 +227,7 @@ https://code.visualstudio.com/docs/remote/containers#_getting-started
 #Backbone relational
 - http://antoviaque.org/docs/tutorials/backbone-relational-tutorial/
 - https://hub.packtpub.com/relations-in-backbone/
+
+
+- json.jbuilder
+http://railscasts.com/episodes/320-jbuilder?view=asciicast
