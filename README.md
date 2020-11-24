@@ -232,6 +232,9 @@ https://code.visualstudio.com/docs/remote/containers#_getting-started
 - json.jbuilder
 http://railscasts.com/episodes/320-jbuilder?view=asciicast
 
+- rolify
+https://github.com/RolifyCommunity/rolify 
+
 
 -callbacks and promises
 https://www.youtube.com/watch?v=PoRJizFvM7s&amp%3Bt=0s
