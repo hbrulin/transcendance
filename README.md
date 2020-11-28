@@ -236,5 +236,9 @@ http://railscasts.com/episodes/320-jbuilder?view=asciicast
 https://github.com/RolifyCommunity/rolify 
 
 
--callbacks and promises
+- callbacks and promises
 https://www.youtube.com/watch?v=PoRJizFvM7s&amp%3Bt=0s
+
+
+- adding new routes
+https://guides.rubyonrails.org/routing.html#adding-more-restful-actions
