@@ -239,6 +239,7 @@ https://github.com/RolifyCommunity/rolify
 - callbacks and promises
 https://www.youtube.com/watch?v=PoRJizFvM7s&amp%3Bt=0s
 
+- Rails
+- adding new routes : https://guides.rubyonrails.org/routing.html#adding-more-restful-actions
+- update attributes : https://davidverhasselt.com/set-attributes-in-activerecord/
 
-- adding new routes
-https://guides.rubyonrails.org/routing.html#adding-more-restful-actions
